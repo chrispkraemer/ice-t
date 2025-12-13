@@ -1,7 +1,7 @@
 {
-    "name": "Banana Example",
-    "version": "0.1.9",
-    "description": "An example C++ extension with a banana flavour.",
+    "name": "ice_t",
+    "version": "0.0.1",
+    "description": "Checkpoint and Restore functionality for ice_t",
     "license": "MIT",
     "dependencies": {
         "core": "*",
@@ -11,10 +11,10 @@
         "README.md",
         "shims.d.ts",
         "enums.d.ts",
-        "banana.ts",
-        "banana.cpp",
-        "_locales/es-ES/Banana Example-jsdoc-strings.json",
-        "_locales/es-ES/Banana Example-strings.json"
+        "ice_t.ts",
+        "ice_t.cpp",
+        "_locales/es-ES/ice_t-Example-jsdoc-strings.json",
+        "_locales/es-ES/ice_t-Example-strings.json"
     ],
     "testFiles": [
         "main.ts",

@@ -1,8 +1,8 @@
 # MakeCode "banana" Example Extension
 
- !["Build status badge"](https://github.com/carlosperate/pxt-banana/workflows/MakeCode/badge.svg)
+ !["Build status badge"](https://github.com/chrispkraemer/ice_t/workflows/MakeCode/badge.svg)
 
-An example MakeCode (PXT) extension using C++, with comments, and 🍌 flavour.
+An example MakeCode (PXT) extension using C++, with comments.
 
 ## Add to a MakeCode Project
 
@@ -11,7 +11,7 @@ This repository can be added as an **extension** in MakeCode.
 - Open https://makecode.microbit.org
 - Click on **New Project**
 - Click on **Extensions** under the gearwheel menu
-- Search for **https://github.com/carlosperate/pxt-banana** and import it
+- Search for **https://github.com/chrispkraemer/ice_t** and import it
 
 ## Edit this extension
 
@@ -21,7 +21,7 @@ To edit this repository in MakeCode.
 
 - Open https://makecode.microbit.org
 - Click on **Import** then click on **Import URL**
-- Paste **https://github.com/carlosperate/pxt-banana** and click import
+- Paste **https://github.com/chrispkraemer/ice_t** and click import
 
 After the extension is imported it can be tested via a second MakeCode
 workspace/tab, which can load the opened extension from the original
@@ -42,8 +42,8 @@ workspace/tab:
 Using the node.js pxt cli application:
 
 ```bash
-git clone https://github.com/carlosperate/pxt-banana.git
-cd pxt-banana
+git clone https://github.com/chrispkraemer/ice_t.git
+cd ice_t 
 npm install pxt --no-save
 npx pxt target microbit --no-save
 npx pxt install

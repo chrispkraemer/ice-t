@@ -9,27 +9,20 @@
      * Info about shims: https://makecode.com/simshim
      */
 
-declare namespace banana {
+declare namespace ice_t {
 
     /**
-     * This simple C++ function to simply add your bananas!
+     * function to checkpoint the user's code
      */
-    //% shim=banana::banana_add
-    function banana_add(left: int32, right: int32): int32;
+    //% shim=ice_t::ice_t_checkpoint
+    function ice_t_checkpoint(): int32;
 
     /**
      * This function uses the C preprocessor to compile different code
      * depending on the version of the micro:bit.
      */
-    //% shim=banana::banana_multiplier
-    function banana_multiplier(bananas: int32): int32;
-
-    /**
-     * This function uses the C preprocessor to throw an error if this function
-     * is run on a micro:bit V1.
-     */
-    //% shim=banana::bananas_v2_only
-    function bananas_v2_only(bananas: int32): int32;
+    //% shim=ice_t::ice_t_restore
+    function ice_t_restore(): int32;
 }
 
 // Auto-generated. Do not edit. Really.
