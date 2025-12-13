@@ -21,10 +21,9 @@ namespace ice_t {
      */
     //% blockId=checkpoint
     //% block="checkpoint the device"
-    //% shim=ice_t::ice_t_checkpoint
-    export function ice_t_Checkpoint() {
+    //% shim=ice_t::checkpoint
+    export function Checkpoint(): void {
         //this does something
-        return 1;
     }
 
     /**
@@ -32,10 +31,9 @@ namespace ice_t {
      */
     //% blockId=restore
     //% block="Restore a checkpoint"
-    //% shim=ice_t::ice_trestore
-    export function ice_t_Restore() { 
+    //% shim=ice_t::restore
+    export function Restore(): void { 
         // The simulator does not differentiate between board version
         // so the TypeScript code will always run
-        return 1;
     }
 }

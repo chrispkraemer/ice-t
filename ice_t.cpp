@@ -15,19 +15,20 @@ namespace ice_t {
      * function to checkpoint the user's code
      */
     //%
-    int ice_t_checkpoint() {
-        uBit.display.image.clear();
-        return 1;
+    void checkpoint() {
+        codal::ManagedString hello = "there";
+        uBit.display.print(hello);
+        uBit.wait(100);
     }
 
     /**
-     * This function uses the C preprocessor to compile different code
-     * depending on the version of the micro:bit.
+     * function to restore a checkpoint
      */
     //%
-    int ice_t_restore() {
-        uBit.display.image.clear();
-        return 1;
+    void restore() {
+        codal::ManagedString hello ="goodbye";
+        uBit.display.print(hello);
+        uBit.wait(100);
     }
 
 }

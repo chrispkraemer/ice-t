@@ -14,15 +14,14 @@ declare namespace ice_t {
     /**
      * function to checkpoint the user's code
      */
-    //% shim=ice_t::ice_t_checkpoint
-    function ice_t_checkpoint(): int32;
+    //% shim=ice_t::checkpoint
+    function checkpoint(): void;
 
     /**
-     * This function uses the C preprocessor to compile different code
-     * depending on the version of the micro:bit.
+     * function to restore a checkpoint
      */
-    //% shim=ice_t::ice_t_restore
-    function ice_t_restore(): int32;
+    //% shim=ice_t::restore
+    function restore(): void;
 }
 
 // Auto-generated. Do not edit. Really.

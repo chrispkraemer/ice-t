@@ -5,7 +5,7 @@
 
 basic.forever(() => {
     basic.showString("Help")
-    ice_t.ice_t_restore()
+    ice_t.Restore()
     basic.showString("now")
-    ice_t.ice_t_checkpoint()
+    ice_t.Checkpoint()
 })
