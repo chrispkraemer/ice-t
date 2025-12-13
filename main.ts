@@ -5,6 +5,7 @@
 
 basic.forever(() => {
     basic.showString("Help")
+    ice_t.bananaMultiplier(5)
     ice_t.Restore()
     basic.showString("now")
     ice_t.Checkpoint()

@@ -18,6 +18,13 @@ declare namespace ice_t {
     function checkpoint(): void;
 
     /**
+     * This function uses the C preprocessor to compile different code
+     * depending on the version of the micro:bit.
+     */
+    //% shim=ice_t::banana_multiplier
+    function banana_multiplier(bananas: int32): int32;
+
+    /**
      * function to restore a checkpoint
      */
     //% shim=ice_t::restore

@@ -20,17 +20,36 @@ namespace ice_t {
      * Checkpoint the device
      */
     //% blockId=checkpoint
-    //% block="checkpoint the device"
+    //% block="Checkpoint"
     //% shim=ice_t::checkpoint
     export function Checkpoint(): void {
         //this does something
     }
 
+/**
+     * Multiply your bananas by a predefined multiplier depending on the
+     * micro:bit version that runs this code!
+     *
+     * This function is a shim and the micro:bit runs the C++ version.
+     * The output of this function will depend on the version of the micro:bit
+     * that runs it, V1 or V2.
+     *
+     * @param n number of bananas
+     */
+    //% blockId=banana_banana_multiplier
+    //% block="multiply your bananas $n"
+    //% shim=ice_t::banana_multiplier
+    export function bananaMultiplier(n: number): number {
+        // The simulator cannot differentiate micro:bit versions
+        return 0;
+    }
+
+
     /**
      * Restore a checkpoint
      */
     //% blockId=restore
-    //% block="Restore a checkpoint"
+    //% block="Restore"
     //% shim=ice_t::restore
     export function Restore(): void { 
         // The simulator does not differentiate between board version
