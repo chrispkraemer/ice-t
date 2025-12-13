@@ -18,9 +18,6 @@ namespace ice_t {
      */
     //%
     void checkpoint() {
-        codal::ManagedString hello = "there";
-        uBit.display.print(hello);
-        uBit.wait(100);
     }
 
      /**
@@ -43,9 +40,6 @@ namespace ice_t {
      */
     //%
     void restore() {
-        codal::ManagedString hello ="goodbye";
-        uBit.display.print(hello);
-        uBit.wait(100);
     }
 
 }
