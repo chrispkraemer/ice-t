@@ -6,6 +6,9 @@
  * Info about shims: https://makecode.com/simshim
  */
 #include "pxt.h"
+//#include "MicroBit.h"
+
+//MicroBit uBit;
 
 using namespace pxt;
 
@@ -18,6 +21,16 @@ namespace ice_t {
      */
     //%
     void checkpoint() {
+
+
+        #if MICROBIT_CODAL
+            // On micro:bit V2 the multiplier is higher than V1
+            uBit.display.image.clear();
+            uBit.wait(3000);
+        #else
+            codal::ManagedString outputstr = "needs V2";
+            uBit.display.print(outputstr);
+        #endif
     }
 
      /**
@@ -40,6 +53,15 @@ namespace ice_t {
      */
     //%
     void restore() {
+        #if MICROBIT_CODAL
+            // On micro:bit V2 the multiplier is higher than V1
+            codal::ManagedString outputstr = "restoring";
+            uBit.display.print(outputstr);
+#else
+                // On micro:bit V1 the multiplier is lower than V2
+            codal::ManagedString outputstr = "needs V2";
+            uBit.display.print(outputstr);
+        #endif
     }
 
 }
