@@ -24,6 +24,10 @@ namespace ice_t {
     //% shim=ice_t::checkpoint
     export function Checkpoint(): void {
         //this does something
+        let var1 = 20
+        while (var1 > 0) {
+            var1--
+        }
     }
 
 /**
@@ -54,5 +58,9 @@ namespace ice_t {
     export function Restore(): void { 
         // The simulator does not differentiate between board version
         // so the TypeScript code will always run
+        let var1 = 20
+        while (var1 > 0) {
+            var1--
+        }
     }
 }
