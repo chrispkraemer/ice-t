@@ -28,8 +28,7 @@ namespace ice_t {
             uBit.display.image.clear();
             uBit.wait(3000);
         #else
-            codal::ManagedString outputstr = "needs V2";
-            uBit.display.print(outputstr);
+            //UHHHHHHH
         #endif
     }
 
@@ -59,8 +58,7 @@ namespace ice_t {
             uBit.display.print(outputstr);
 #else
                 // On micro:bit V1 the multiplier is lower than V2
-            codal::ManagedString outputstr = "needs V2";
-            uBit.display.print(outputstr);
+                //UGHHHHHHHHHHHH
         #endif
     }
 
