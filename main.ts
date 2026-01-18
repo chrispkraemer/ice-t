@@ -7,12 +7,15 @@ serial.setBaudRate(BaudRate.BaudRate115200)
 let var1 = 0
 ice_t.Restore()
 serial.writeLine("hello")
-basic.forever(() => {
+while (1) {
     //basic.showString("Help")
+    //let var2 = 0xDEADBEEE
+    //let var3 = 0xffffffff
+    //var2++
     basic.showNumber(var1)
     var1++;
     ice_t.Checkpoint()
     basic.pause(1000)
     //basic.showString("now")
     //ice_t.Checkpoint()
-})
+}    

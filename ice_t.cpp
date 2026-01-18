@@ -116,24 +116,24 @@ namespace ice_t {
             unsigned int tophalf = numLookup(a);
             unsigned int bottomhalf = numLookup(b);
             unsigned int b0, b1, b2, b3;
-            b0 = (tophalf << 4) | bottomhalf;
+            b0 = (tophalf << 4) | (bottomhalf & 0xff);
 
 
             tophalf = numLookup(buf[2]);
             bottomhalf = numLookup(buf[3]);
 
-            b1 = (tophalf << 4) | bottomhalf;
+            b1 = (tophalf << 4) | (bottomhalf & 0xff) ;
 
             tophalf = numLookup(buf[4]);
             bottomhalf = numLookup(buf[5]);
 
-            b2 = (tophalf << 4) | bottomhalf;
+            b2 = (tophalf << 4) | (bottomhalf & 0xff);
 
 
             tophalf = numLookup(buf[6]);
             bottomhalf = numLookup(buf[7]);
 
-            b3 = (tophalf << 4) | bottomhalf;
+            b3 = (tophalf << 4) | (bottomhalf & 0xff);
 
             result = (b0 << 24) | (b1 << 16) | (b2 << 8) | b3;
 
@@ -181,6 +181,8 @@ namespace ice_t {
             asm volatile(
                 "NOP\n\t"
                 "NOP\n\t"
+                "BKPT \n\t"
+                "BKPT \n\t"
                 "NOP\n\t"
                 "MOV %0, sp\n\t"
                 "MOV %1, lr\n\r"
@@ -217,8 +219,9 @@ namespace ice_t {
                 sp_ptr++;
             }
 
-            uBit.serial.printf("done with loop\r\n");
+            //uBit.serial.printf("done with loop\r\n");
 
+            
             asm volatile(
                 "NOP\n\t"
                 "NOP\n\t"
@@ -227,16 +230,16 @@ namespace ice_t {
                 "MOV R8, R8\n\t"
                 "NOP\n\t"
                 "NOP\n\t"
-                "MOV %0, SP\n\t"
-                "MOV %1, LR\n\t"
                 "NOP\n\t"
                 "NOP\n\t"
+                "BKPT\n\t"
+                "BKPT\n\t"
                 "NOP\n\t"
                 "NOP\n\t"
-                : "=r" (regs[0]), "=r" (regs[1])
+                :
                 :
                 :);
-
+            
             //uBit.serial.printf("sp after: %X\r\n", regs[0]);
             //uBit.serial.printf("lr after: %X\r\n", regs[1]);
 
@@ -279,6 +282,7 @@ namespace ice_t {
             "NOP\n\t"
             "NOP\n\t"
             "NOP\n\t"
+            "BKPT\n\t"
             "NOP\n\t"
             "POP {r0, r1, r2, r3, r4, r5, r6, r7}\n\t"
             "NOP\n\t"
@@ -352,26 +356,6 @@ namespace ice_t {
                 uBit.serial.printf("sp: %X\r\n", sp);
                 sp_ptr = (unsigned int *)sp;
                 unsigned int stack_val;
-                while ((unsigned int)sp_ptr < 0x20020000)
-                {
-                    offset = offset + 9; //8bytes + null term
-                    for (int i = 0; i < 8; i++)
-                    {
-                        subsection[i] = blah[i + offset];
-                    }
-                    subsection[8] = 0;
-                    stack_val = charToUnsignedInt(subsection);
-                    //*sp_ptr = stack_val;
-                    uBit.serial.printf("At %X just wrote: %X\r\n", sp_ptr, stack_val);
-                    sp_ptr++;
-                }
-
-
-
-                free(csvData);
-
-               /* 
-
                 asm volatile(
                     "NOP\n\t"
                     "NOP\n\t"
@@ -381,11 +365,43 @@ namespace ice_t {
                     "MOV R8, R8\n\t"
                     "NOP\n\t"
                     "NOP\n\t"
-                    "B trampoline_target\n\t"
                     :
                     :"r" (sp), "r" (lr)
                     :);
-                */
+                while ((unsigned int)sp_ptr < 0x20020000)
+                {
+                    offset = offset + 9; //8bytes + null term
+                    for (int i = 0; i < 8; i++)
+                    {
+                        subsection[i] = blah[i + offset];
+                    }
+                    subsection[8] = 0;
+                    stack_val = charToUnsignedInt(subsection);
+                    *sp_ptr = stack_val;
+                    uBit.serial.printf("At %X just wrote: %X\r\n", sp_ptr, *sp_ptr);
+                    sp_ptr++;
+                }
+
+
+
+                free(csvData);
+
+                
+
+                asm volatile(
+                    "NOP\n\t"
+                    "NOP\n\t"
+                    "BKPT\n\t"
+                    "BKPT\n\t"
+                    "NOP\n\t"
+                    "MOV R8, R8\n\t"
+                    "NOP\n\t"
+                    "NOP\n\t"
+                    "B trampoline_target\n\t"
+                    :
+                    :
+                    :);
+                
 
 
                 //blash
