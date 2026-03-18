@@ -57,7 +57,9 @@ enum OPCODES {
 };
 
 int once = 0;
-codal::SPI* fram_spi = new codal::SPI(MOSI, MISO, SCK); //probably need to do this differently(should exist on the stack somewhere?)
+#if MICROBIT_CODAL
+codal::SPI* fram_spi = new codal::SPI(MOSI, MISO, SCK); 
+#endif
 int generation = -1;
 unsigned int lowbufferAddr = 4;
 unsigned int highbufferAddr = 130000;
@@ -104,93 +106,10 @@ namespace ice_t {
         uBit.io.P9.setDigitalValue(1);
     }
 
-    /**
-     * function to INITIALIZE the FRAM(non-volatile storage) 
-     */
-    //%
-    void fram_init(){
-
-        int tx, whoami, wh0, wh1, wh2, wh3;
-
-        uBit.io.P9.setDigitalValue(0);
-        tx = 159;
-        whoami = fram_spi->write(OPCODE_RDID);
-
-        // uBit.serial.printf("passed whoami: %d\r\n", whoami);
-        tx = 255;
-        wh0 = fram_spi->write(255);
-        // uBit.serial.printf("passed wh0: %d\r\n", wh0);
-        wh1 = fram_spi->write(255);
-        // uBit.serial.printf("passed wh1: %d\r\n", wh1);
-        wh2 = fram_spi->write(255);
-        // uBit.serial.printf("passed wh2: %d\r\n", wh2);
-        wh3 = fram_spi->write(255);
-        // uBit.serial.printf("passed wh3: %d\r\n", wh3);
-        uBit.io.P9.setDigitalValue(1);
-
-        // uBit.serial.printf("received %d\r\n", wh1);
-
-        if (wh1 == 127)
-        {
-            uBit.serial.printf("FRAM Connected\r\n");
-        }
-        else
-        {
-            uBit.serial.printf("FRAM NOT connected\r\n");
-        }
-
-        generation = read8(0x0);
-    }
 
 
 
 
-    /**
-     * function to clear the FRAM(non-volatile storage) 
-     */
-    //%
-    void clear_FRAM(){
-        write_enable();
-        uBit.io.P9.setDigitalValue(0);
-        fram_spi->write(OPCODE_WRITE);
-        fram_spi->write(0);
-        fram_spi->write(0);
-        fram_spi->write(0);
-        fram_spi->write(0);
-        fram_spi->write(0);
-        fram_spi->write(0);
-        fram_spi->write(0);
-        /*
-        for (int i = 0; i < 256000; i++)
-        {
-           fram_spi->write(0);
-        }
-        */
-        uBit.io.P9.setDigitalValue(1);
-
-        uBit.serial.printf("FRAM Cleared\r\n");
-
-        while (1)
-            ;
-    }
-
-    /**
-     * function to add a breakpoint for debugging purposes 
-     */
-    //%
-    void breakpoint(){
-    
-        asm volatile(
-            "NOP \n\t"
-            "NOP \n\t"
-            "BKPT \n\t"
-            "NOP \n\t"
-            "NOP \n\t"
-            :
-            :
-            :
-        );
-    }
 
     static void writeNum(char *buf, uint32_t n)
     {
@@ -690,6 +609,106 @@ It is also possible that this overwrite isn't quite correct. I will want to doub
             return bananas * V1_MULTIPLIER;
         #endif
     }
+
+
+
+    /**
+     * function to INITIALIZE the FRAM(non-volatile storage) 
+     */
+    //%
+    void fram_init(){
+
+        #if MICROBIT_CODAL
+        int tx, whoami, wh0, wh1, wh2, wh3;
+
+        uBit.io.P9.setDigitalValue(0);
+        tx = 159;
+        whoami = fram_spi->write(OPCODE_RDID);
+
+        // uBit.serial.printf("passed whoami: %d\r\n", whoami);
+        tx = 255;
+        wh0 = fram_spi->write(255);
+        // uBit.serial.printf("passed wh0: %d\r\n", wh0);
+        wh1 = fram_spi->write(255);
+        // uBit.serial.printf("passed wh1: %d\r\n", wh1);
+        wh2 = fram_spi->write(255);
+        // uBit.serial.printf("passed wh2: %d\r\n", wh2);
+        wh3 = fram_spi->write(255);
+        // uBit.serial.printf("passed wh3: %d\r\n", wh3);
+        uBit.io.P9.setDigitalValue(1);
+
+        // uBit.serial.printf("received %d\r\n", wh1);
+
+        if (wh1 == 127)
+        {
+            uBit.serial.printf("FRAM Connected\r\n");
+        }
+        else
+        {
+            uBit.serial.printf("FRAM NOT connected\r\n");
+        }
+
+        generation = read8(0x0);
+        
+        #endif
+    }
+
+
+    /**
+     * function to clear the FRAM(non-volatile storage) 
+     */
+    //%
+    void clear_FRAM(){
+        #if MICROBIT_CODAL
+        write_enable();
+        uBit.io.P9.setDigitalValue(0);
+        fram_spi->write(OPCODE_WRITE);
+        fram_spi->write(0);
+        fram_spi->write(0);
+        fram_spi->write(0);
+        fram_spi->write(0);
+        fram_spi->write(0);
+        fram_spi->write(0);
+        fram_spi->write(0);
+        /*
+        for (int i = 0; i < 256000; i++)
+        {
+           fram_spi->write(0);
+        }
+        */
+        uBit.io.P9.setDigitalValue(1);
+
+        uBit.serial.printf("FRAM Cleared\r\n");
+
+        while (1)
+            ;
+        
+        #endif
+    }
+
+
+
+    /**
+     * function to add a breakpoint for debugging purposes 
+     */
+    //%
+    void breakpoint(){
+        #if MICROBIT_CODAL
+    
+        asm volatile(
+            "NOP \n\t"
+            "NOP \n\t"
+            "BKPT \n\t"
+            "NOP \n\t"
+            "NOP \n\t"
+            :
+            :
+            :
+        );
+
+        #endif
+    }
+
 
     /**
      * function to restore a checkpoint
