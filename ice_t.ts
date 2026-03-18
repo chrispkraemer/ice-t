@@ -30,6 +30,51 @@ namespace ice_t {
         }
     }
 
+    /**
+     * Debugging only. Adds a breakpoint
+     */
+    //% blockId=breakpoint
+    //% block="Breakpoint"
+    //% shim=ice_t::breakpoint
+    export function Breakpoint(): void {
+        //this does something
+        let var1 = 20
+        while (var1 > 0) {
+            var1--
+        }
+    }
+
+
+    /**
+     * clear the fram
+     */
+    //% blockId=clearFRAM
+    //% block="clearFRAM"
+    //% shim=ice_t::clear_FRAM
+    export function clearFRAM(): void {
+        //this does something
+        let var1 = 20
+        while (var1 > 0) {
+            var1--
+        }
+    }
+
+
+
+    /**
+     * Initialize the fram
+     */
+    //% blockId=initFRAM
+    //% block="initFRAM"
+    //% shim=ice_t::fram_init
+    export function init_FRAM(): void {
+        //this does something
+        let var1 = 20
+        while (var1 > 0) {
+            var1--
+        }
+    }
+
 /**
      * Multiply your bananas by a predefined multiplier depending on the
      * micro:bit version that runs this code!
